@@ -83,11 +83,18 @@ class WalletController extends Controller
                     'amount' => $accountToCard->amount,
                 ];
             }
+        }else{
+            return [
+                'error' => [
+                    'code' => 301,
+                    'message' => [
+                        'uz' => "Balanceda yetarli mablag' mavjud emas!!!",
+                        'ru' => "На балансе недостаточно средств!!!",
+                        'en' => "There are not enough funds in the balance!!!",
+                    ],
+                ],
+            ];
         }
-        // 1. debit account money
-        // 2. credit card money
-        // 3. return response
-
     }
 
     public function success($card)

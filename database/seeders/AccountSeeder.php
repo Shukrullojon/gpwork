@@ -20,7 +20,7 @@ class AccountSeeder extends Seeder
             'number' => '22640000200001186007',
             'inn' => '203556638',
             'name' => 'ЭД по договору 15/23 от 15.05.2023г (Unired)',
-            'filial' => 0,
+            'filial' => '01186',
             'balance' => 0,
         ]);
     }
