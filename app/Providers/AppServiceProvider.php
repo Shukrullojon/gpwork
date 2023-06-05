@@ -24,10 +24,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
-        // Laravel Pagination use Bootstrap
+        Schema::defaultStringLength(191);
         Paginator::useBootstrap();
-
         // Connect Helpers
         foreach (glob(__DIR__.'/../Helpers/*.php') as $filename) {
             require_once $filename;
