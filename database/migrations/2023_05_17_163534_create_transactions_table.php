@@ -19,7 +19,7 @@ class CreateTransactionsTable extends Migration
             $table->bigInteger('model_id');
             $table->json('request');
             $table->json('response');
-            $table->tinyInteger('status')->nullable();
+            $table->tinyInteger('status');
             $table->timestamps();
         });
     }
