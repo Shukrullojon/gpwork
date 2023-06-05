@@ -33,6 +33,9 @@ class WalletController extends Controller
                 'owner' => $params['params']['owner'],
                 'balance' => 0,
                 'phone' => $params['params']['phone'],
+                'pnfl' => $params['params']['pnfl'],
+                'pasport_series' => $params['params']['pasport_series'],
+                'pasport_number' => $params['params']['pasport_number'],
                 'token' => Str::uuid(),
                 'status' => 1,
             ]);

@@ -22,6 +22,9 @@ class CreateCardsTable extends Migration
             $table->string('owner',100);
             $table->bigInteger('balance');
             $table->string('phone',16);
+            $table->string('pnfl',14);
+            $table->string("pasport_series",2);
+            $table->string("pasport_number",7);
             $table->string('token',100);
             $table->tinyInteger('status')->comment('1 -> active, 13 -> closed');
             $table->timestamps();

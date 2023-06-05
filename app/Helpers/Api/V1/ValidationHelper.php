@@ -12,8 +12,11 @@ class ValidationHelper
             ];
         }else if($params['method'] == "wallet.create"){
             return [
-                "params.owner" => "required",
-                "params.phone" => "required",
+                "params.owner" => "required|min:5|max:40",
+                "params.phone" => "required|max:16",
+                "params.pnfl" => "required|min:14|max:14",
+                "params.pasport_series" => "required|min:2|max:2",
+                "params.pasport_number" => "required|min:5|max:7",
             ];
         }else if($params['method'] == "wallet.info"){
             return [
