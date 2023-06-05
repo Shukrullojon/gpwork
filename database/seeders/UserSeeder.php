@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        /*User::create([
+        User::create([
             "name" => "Shukrullo",
             "email" => "shukrullobk@gmail.com",
             "token" => Str::random(80),
@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
             "theme" => "default",
             "created_at" => date("Y-m-d H:i:s"),
             "updated_at" => date("Y-m-d H:i:s"),
-        ]);*/
+        ]);
 
         User::create([
             "name" => "GPWORK",

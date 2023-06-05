@@ -110,6 +110,9 @@ class WalletController extends Controller
             'phone' => $card->phone,
             'token' => $card->token,
             'status' => $card->status,
+            'pnfl' => $card->pnfl,
+            'pasport_series' => $card->pasport_series,
+            'pasport_number' => $card->pasport_number,
         ];
     }
 
