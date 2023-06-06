@@ -15,6 +15,19 @@ class TransferController extends Controller
     public function create($params)
     {
         $card = Card::where('token', $params['params']['sender'])->first();
+        if ($card->balance < $params['params']['amount']){
+            return [
+                'error' => [
+                    'code' => 101,
+                    'message' => [
+                        'uz' => "Balanceda yetarli mablag' mavjud emas",
+                        'ru' => "На балансе недостаточно средств",
+                        'en' => "There are insufficient funds in the balance",
+                    ],
+                ],
+            ];
+        }
+
         $transfer = Transfer::create([
             'ext_id' => Str::uuid(),
             'sender' => $params['params']['sender'],
@@ -77,6 +90,20 @@ class TransferController extends Controller
                     'status' => 4,
                 ]);
                 return $this->success($transfer);
+            }else{
+                $transfer->update([
+                    'status' => 20,
+                ]);
+                return [
+                    'error' => [
+                        'code' => 302,
+                        'message' => [
+                            'uz' => "Tranzaksiyani amalga oshirib bo'lmadi!!!",
+                            'ru' => "Транзакция не может быть завершена!!!",
+                            'en' => "The transaction could not be completed!!!",
+                        ],
+                    ],
+                ];
             }
         }else{
             return [
