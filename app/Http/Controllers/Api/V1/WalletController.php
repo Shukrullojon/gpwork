@@ -85,6 +85,18 @@ class WalletController extends Controller
                     'tr_id' => $accountToCard->uuid,
                     'amount' => $accountToCard->amount,
                 ];
+            }else{
+                $accountToCard->update([
+                    'status' => 11
+                ]);
+                return [
+                    'error' => [
+                        'code' => 303,
+                        'message' => [
+                            'uz' => "Wallet to'ldirishda xatolik!!!",
+                        ],
+                    ],
+                ];
             }
         }else{
             return [
