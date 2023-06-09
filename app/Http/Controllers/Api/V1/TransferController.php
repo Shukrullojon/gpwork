@@ -14,6 +14,16 @@ class TransferController extends Controller
 
     public function create($params)
     {
+        return [
+            'error' => [
+                'code' => 400,
+                'message' => [
+                    'uz' => "",
+                    'uz' => "",
+                    'uz' => "",
+                ],
+            ],
+        ];
         $card = Card::where('token', $params['params']['sender'])->first();
 
         $transfer = Transfer::create([
@@ -50,6 +60,16 @@ class TransferController extends Controller
     }
 
     public function confirm($params){
+        return [
+            'error' => [
+                'code' => 400,
+                'message' => [
+                    'uz' => "",
+                    'uz' => "",
+                    'uz' => "",
+                ],
+            ],
+        ];
         $transfer = Transfer::where('ext_id',$params['params']['ext_id'])->first();
         if ($transfer->status != 0){
             return [
