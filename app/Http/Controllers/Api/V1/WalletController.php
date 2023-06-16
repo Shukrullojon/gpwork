@@ -52,6 +52,18 @@ class WalletController extends Controller
     {
         $card = Card::where('token', $params['params']['token'])->first();
         $account = Account::where('type', 2)->first();
+        if ($account->balance < $params['params']['amount']){
+            return [
+                'error' => [
+                    'code' => 351,
+                    'message' => [
+                        'uz' => "Balansda yetarli mablang mavjud emas!!!",
+                        'ru' => "На балансе недостаточно денег!!!",
+                        'en' => "There is not enough money in the balance!!!",
+                    ],
+                ],
+            ];
+        }
         $accountToCard = AccountToCard::create([
             'account_balance' => $account->balance,
             'account_id' => $account->id,
