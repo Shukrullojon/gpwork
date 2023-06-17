@@ -60,6 +60,16 @@ class TransferController extends Controller
     }
 
     public function confirm($params){
+        return [
+            'error' => [
+                'code' => 300,
+                'message' => [
+                    'uz' => "Transfer.confirm vaqtinchalik amalga oshirib bo'lmaydi!!!",
+                    'ru' => "Transfer.confirm временно недоступен!!!",
+                    'en' => "Transfer.confirm is temporarily unavailable!!!",
+                ],
+            ],
+        ];
         $transfer = Transfer::where('ext_id',$params['params']['ext_id'])->first();
         if ($transfer->status != 0){
             return [
