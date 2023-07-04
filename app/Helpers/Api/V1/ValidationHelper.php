@@ -31,7 +31,8 @@ class ValidationHelper
             return [
                 "params.sender" => "required|exists:cards,token",
                 "params.receiver" => "required|numeric",
-                "params.amount" => "required|integer|min:100",
+                "params.amount" => "required|integer|min:100|max:1000000",
+                "params.currency" => "required|integer|in:643",
             ];
         }else if($params['method'] == "transfer.confirm"){
             return [

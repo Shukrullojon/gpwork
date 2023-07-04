@@ -15,6 +15,7 @@ class CreateTransfersTable extends Migration
     {
         Schema::create('transfers', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('user_id');
             $table->string('ext_id',100);
             $table->string('sender',100);
             $table->tinyInteger('senderType');

@@ -23,5 +23,15 @@ class AccountSeeder extends Seeder
             'filial' => '01186',
             'balance' => 0,
         ]);
+
+        Account::create([
+            'type' => 3,
+            'user_id' => 1,
+            'number' => '29896000800001186041',
+            'inn' => '203556638',
+            'name' => 'Комиссия по договору  № 15/23 от 15.05.2023г по проекту GIGPLATFORMWORK',
+            'filial' => '01186',
+            'balance' => 0,
+        ]);
     }
 }

@@ -44,7 +44,7 @@ class AbsService
             "method" => "iabs.account.get.account.details",
             "params" => [
                 "account" => $data['account'],
-                "code_filial" => "00996",
+                "code_filial" => "01186",
                 "id" => rand(10000, 99999),
             ]
         ]);

@@ -19,7 +19,7 @@ class TransferGateway
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_HTTPHEADER, [
-            'Authorization:Bearer c9d29766-aaae-4591-893d-c73976384500',
+            'Authorization:Bearer 8c68331496514b6e8c7e01805941ec61c7a2af9aca71410dbddb486fd5cab639e503391352f544278f2c59b7d27604d3',
             'Content-Type:application/json',
             'Accept:application/json',
             'requestId:' . time() . rand(100, 1000)
