@@ -19,7 +19,7 @@ class TransferController extends Controller
         $card = Card::where('token', $params['params']['sender'])->first();
         // !!! so'mga o'tqazib check qilish kerak
         $count = Transfer::where('created_at','LIKE','%'.date("Y-m-d".'%'))->count('id');
-        if ($count>30) {
+        if ($count>100) {
             return [
                 'error' => [
                     'code' => 351,
