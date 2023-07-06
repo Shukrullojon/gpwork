@@ -139,7 +139,7 @@ class TransferController extends Controller
         {
             $debit = WalletService::debit([
                 'token' => $transfer->sender,
-                'amount' => $transfer->debit_amount + $transfer->commission_amount,
+                'amount' => $transfer->debit_amount, //+ $transfer->commission_amount,
             ]);
             if ($debit) {
                 $transfer->update([
