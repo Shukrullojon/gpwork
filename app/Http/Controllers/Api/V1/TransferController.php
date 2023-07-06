@@ -80,6 +80,7 @@ class TransferController extends Controller
 
     public function confirm($params)
     {
+        // 1 minut ichida confirm qilishini check qilish.
         $transfer = Transfer::where('ext_id', $params['params']['ext_id'])->first();
         if ($transfer->status != 0) {
             return [
@@ -89,6 +90,22 @@ class TransferController extends Controller
                         'uz' => "Tranzaksiya oldin tasdiqlangan!!!",
                         'ru' => "Сделка предварительно одобрена!!!",
                         'en' => "The transaction is pre-approved!!!",
+                    ],
+                ],
+            ];
+        }
+
+        if (strtotime($transfer->created_at) < strtotime(date("Y-m-d H:i:s", strtotime("-1 minutes")))) {
+            $transfer->update([
+                'status' => -5
+            ]);
+            return [
+                'error' => [
+                    'code' => 300,
+                    'message' => [
+                        'uz' => "Tranzaksiya 1 minut ichida tasdiqlanishi kerak!!!",
+                        'ru' => "Транзакция должна быть подтверждена в течение 1 минуты!!!",
+                        'en' => "The transaction must be confirmed within 1 minute!!!",
                     ],
                 ],
             ];
