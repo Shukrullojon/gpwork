@@ -18,8 +18,8 @@ class TransferController extends Controller
     {
         $card = Card::where('token', $params['params']['sender'])->first();
         // !!! so'mga o'tqazib check qilish kerak
-        $count = Transfer::where('created_at','LIKE','%'.date("Y-m-d".'%'))->count('id');
-        if ($count>100) {
+        $count = Transfer::where('created_at', 'LIKE', '%' . date("Y-m-d" . '%'))->count('id');
+        if ($count > 100) {
             return [
                 'error' => [
                     'code' => 351,
@@ -60,7 +60,7 @@ class TransferController extends Controller
                 'document_ext_id' => $request['result']['document_ext_id'],
                 'rate' => $request['result']['rate'],
             ]);
-            if ($card->balance < ($transfer->debit_amount + $transfer->commission_amount)) {
+            if ($card->balance < $transfer->debit_amount) {
                 return [
                     'error' => [
                         'code' => 350,
@@ -128,15 +128,14 @@ class TransferController extends Controller
         $account = AbsService::getAccountDetails([
             'account' => $accountDb->number,
         ]);
-        $hold = Hold::where('state',0)->sum('amount');
+        $hold = Hold::where('state', 0)->sum('amount');
         // check enough money to account
         if (
             isset($account['status']) and
             $account['status'] and
             isset($account['result']['responseBody']['saldo']) and
             ($account['result']['responseBody']['saldo'] - $hold) > ($transfer->debit_amount + $transfer->commission_amount)
-        )
-        {
+        ) {
             $debit = WalletService::debit([
                 'token' => $transfer->sender,
                 'amount' => $transfer->debit_amount, //+ $transfer->commission_amount,
@@ -157,15 +156,15 @@ class TransferController extends Controller
                     "recipient_tax" => $accountDb3->inn,
                     "recipient_name" => $accountDb3->name,
                     "purpose" => [
-                        "code"=>"00668",
-                        "name"=>"перевод (дата: ".date("Y-m-d H:i:s").") sender:".$transfer->sender." receiver:".$transfer->receiver." transfer_id: ".$transfer->id
+                        "code" => "00668",
+                        "name" => "перевод (дата: " . date("Y-m-d H:i:s") . ") sender:" . $transfer->sender . " receiver:" . $transfer->receiver . " transfer_id: " . $transfer->id
                     ],
                     "amount" => $transfer->debit_amount + $transfer->commission_amount,
                 ];
                 Hold::create([
                     'model' => Transfer::class,
                     'model_id' => $transfer->id,
-                    'data' => json_encode($data,JSON_UNESCAPED_UNICODE),
+                    'data' => json_encode($data, JSON_UNESCAPED_UNICODE),
                     'amount' => $transfer->debit_amount + $transfer->commission_amount,
                     'state' => 0,
                 ]);
@@ -204,7 +203,7 @@ class TransferController extends Controller
                     ],
                 ];
             }
-        }else{
+        } else {
             return [
                 'error' => [
                     'code' => 304,
