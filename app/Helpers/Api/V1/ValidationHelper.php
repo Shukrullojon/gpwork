@@ -25,7 +25,7 @@ class ValidationHelper
         }else if($params['method'] == "wallet.payment"){
             return [
                 "params.token" => "required|exists:cards,token",
-                "params.amount" => "required|integer|min:100|max:1000000000",
+                "params.amount" => "required|integer|min:100|max:3000000000",
             ];
         }else if($params['method'] == "transfer.create"){
             return [
