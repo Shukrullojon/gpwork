@@ -12,7 +12,7 @@ class ValidationHelper
             ];
         }else if($params['method'] == "wallet.create"){
             return [
-                "params.owner" => "required|min:5|max:40",
+                "params.owner" => "required|min:5|max:100",
                 "params.phone" => "required|max:16",
                 "params.pnfl" => "required|min:14|max:14",
                 "params.pasport_series" => "required|min:2|max:2",
