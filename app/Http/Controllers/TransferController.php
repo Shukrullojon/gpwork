@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\TransferExport;
 use App\Models\Transfer;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Excel;
 
 class TransferController extends Controller
 {
@@ -19,5 +21,23 @@ class TransferController extends Controller
         return view('pages.transfer.index',[
             'transfers' => $transfers,
         ]);
+    }
+
+    public function export(Request $request)
+    {
+        $data = Transfer::select(
+            'sender',
+            'receiver',
+            'amount',
+            "credit_amount",
+            "debit_amount",
+            "commission_amount",
+            "rate",
+            "status",
+            "created_at"
+        )->where('status', 4);
+
+        $data = $data->get()->toArray();
+        return Excel::download(new TransferExport($data), time() . '.xlsx');
     }
 }

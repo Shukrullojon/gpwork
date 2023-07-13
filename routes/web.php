@@ -16,6 +16,7 @@ Route::group(['middleware' => 'auth'],function (){
 
     Route::group(['prefix'=>'transfer', 'namespace'=>'\App\Http\Controllers'], function(){
         Route::get('/', 'TransferController@index')->name('transferIndex');
+        Route::get('/export', 'TransferController@export')->name('excelExportTransfer');
     });
     // User
     Route::group(['prefix'=>'user', 'namespace'=>'\App\Http\Controllers\Blade'], function(){
