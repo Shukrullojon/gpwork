@@ -4,12 +4,26 @@
     <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu"
         data-accordion="false">
 
-            <li class="nav-item">
-                <a href="{{ route('home') }}" class="nav-link {{ Request::is('home*') ? "active":'' }}">
-                    <i class="fas fa-cog"></i>
-                    <p>Главная</p>
-                </a>
-            </li>
+        <li class="nav-item">
+            <a href="{{ route('home') }}" class="nav-link {{ Request::is('home*') ? "active":'' }}">
+                <i class="fas fa-cog"></i>
+                <p>Главная</p>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="{{ route('cardIndex') }}" class="nav-link {{ Request::is('card*') ? "active":'' }}">
+                <i class="fas fa-cog"></i>
+                <p>Ucoin</p>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="{{ route('transferIndex') }}" class="nav-link {{ Request::is('transfer*') ? "active":'' }}">
+                <i class="fas fa-cog"></i>
+                <p>Transfer</p>
+            </a>
+        </li>
 
 
         @canany([

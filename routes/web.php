@@ -9,21 +9,14 @@ Route::group(['middleware' => 'auth'],function (){
     Route::get('/', [App\Http\Controllers\Blade\HomeController::class, 'index']);
     Route::get('/home', [App\Http\Controllers\Blade\HomeController::class,'index'])->name('home');
 
-    //merchants
-    /*Route::group(['prefix'=>'merchant', 'namespace'=>'\App\Http\Controllers\Pages'], function(){
-        Route::get('/index', 'MerchantController@index')->name('merchantIndex');
-        Route::get('/add', 'MerchantController@add')->name('merchantAdd');
-        Route::post('/merchant/store', 'MerchantController@store')->name('merchantStore');
-        Route::get('/show/{id}', 'MerchantController@show')->name('merchantShow');
-        Route::get('/edit/{id}', 'MerchantController@edit')->name('merchantEdit');
-        Route::post('/update/{id}', 'MerchantController@update')->name('merchantUpdate');
-        Route::post('/getAccountDetails/', 'MerchantController@getAccountDetails')->name('getAccountDetails');
-        Route::delete('/delete/{id}', 'MerchantController@destroy')->name('merchantDestroy');
-        Route::post('/removeMerchant', 'MerchantController@removeMerchant')->name('removeMerchant');
-        Route::get('/download/{key}','MerchantController@download')->name("downloadQrCode");
-        Route::get('/export','MerchantController@exportMerchant')->name("exportMerchant");
-    });*/
+    Route::group(['prefix'=>'card', 'namespace'=>'\App\Http\Controllers'], function(){
+        Route::get('/', 'CardController@index')->name('cardIndex');
+        Route::get('/show/{id}', 'CardController@show')->name('cardShow');
+    });
 
+    Route::group(['prefix'=>'transfer', 'namespace'=>'\App\Http\Controllers'], function(){
+        Route::get('/', 'TransferController@index')->name('transferIndex');
+    });
     // User
     Route::group(['prefix'=>'user', 'namespace'=>'\App\Http\Controllers\Blade'], function(){
         Route::get('/', 'UserController@index')->name('userIndex');

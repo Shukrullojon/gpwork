@@ -12,4 +12,8 @@ class Transfer extends Model
     protected $table = 'transfers';
 
     protected $guarded = [];
+
+    public function card(){
+        return $this->belongsTo(Card::class,'sender','token');
+    }
 }
