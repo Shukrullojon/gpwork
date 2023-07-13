@@ -45,6 +45,35 @@
                                     <th>Status</th>
                                     <th></th>
                                 </tr>
+                                <tr class="text-center">
+                                    <form action="">
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th>
+                                            <select name="status" class="form-control">
+                                                <option></option>
+                                                <option
+                                                    @if(isset(request()->status) and request()->status == 4) selected
+                                                    @endif value="4">@lang('cruds.status.1')</option>
+                                                <option
+                                                    @if(isset(request()->status) and request()->status == 0) selected
+                                                    @endif value="0">@lang('cruds.status.0')</option>
+                                            </select>
+                                        </th>
+                                        <th>
+                                            <button name="accountSearch" id="searchSubmit" class="btn btn-default"
+                                                    type="submit">
+                                                <span class="fa fa-search"></span>
+                                            </button>
+                                        </th>
+
+                                    </form>
+                                </tr>
                                 </thead>
                                 <tbody>
 
@@ -59,7 +88,10 @@
                                         <td>{{ number_format($transfer->debit_amount/100) }} UZS</td>
                                         <td>{{ number_format($transfer->commission_amount/100) }} UZS</td>
                                         <td>{{ $transfer->rate  }}</td>
-                                        <td>{{ $transfer->status }}</td>
+                                        <td>
+                                            @if($transfer->status == 4)  @lang('cruds.status.1') @endif
+                                            @if($transfer->status != 4)  @lang('cruds.status.0') @endif
+                                        </td>
                                         <td>
 
                                         </td>
