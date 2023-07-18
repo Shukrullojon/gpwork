@@ -106,7 +106,7 @@
                                 <tfooter>
                                     <tr>
                                         <td colspan="9">
-                                            {{ $transfers->links() }}
+                                            {{ $transfers->withQueryString()->links()   }}
                                         </td>
                                     </tr>
                                 </tfooter>
