@@ -44,6 +44,7 @@
                                     <th>Commission(Amount)</th>
                                     <th>Rate</th>
                                     <th>Status</th>
+                                    <th>Date</th>
                                     <th></th>
                                 </tr>
                                 <tr class="text-center">
@@ -66,6 +67,7 @@
                                                     @endif value="0">@lang('cruds.status.0')</option>
                                             </select>
                                         </th>
+                                        <th></th>
                                         <th>
                                             <button name="accountSearch" id="searchSubmit" class="btn btn-default"
                                                     type="submit">
@@ -93,6 +95,7 @@
                                             @if($transfer->status == 4)  @lang('cruds.status.1') @endif
                                             @if($transfer->status != 4)  @lang('cruds.status.0') @endif
                                         </td>
+                                        <td>{{ date("Y-m-d H:i:s", strtotime($transfer->created_at)) }}</td>
                                         <td>
 
                                         </td>
