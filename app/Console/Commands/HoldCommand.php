@@ -42,9 +42,9 @@ class HoldCommand extends Command
      */
     public function handle()
     {
-        $holds = Hold::where('status',0)->get();
+        $holds = Hold::where('state',0)->get();
         foreach ($holds as $hold){
-            $abs = AbsService::transaction(json_decode($hold->data));
+            $abs = AbsService::transaction(json_decode($hold->data,true));
             if (isset($abs['status']) and $abs['status']){
                 $hold->update([
                     'state' => 1,
