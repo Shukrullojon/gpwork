@@ -60,7 +60,7 @@ class TransferController extends Controller
                 'document_ext_id' => $request['result']['document_ext_id'],
                 'rate' => $request['result']['rate'],
             ]);
-            if ($card->balance <= $transfer->debit_amount) {
+            if ($card->balance < $transfer->debit_amount) {
                 return [
                     'error' => [
                         'code' => 350,
