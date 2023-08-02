@@ -147,11 +147,11 @@ class TransferController extends Controller
                 // money to hold
                 $data = [
                     "type" => "101",
-                    "sender_account" => $accountDb->account,
+                    "sender_account" => $accountDb->number,
                     "sender_code_filial" => $accountDb->filial,
                     "sender_tax" => $accountDb->inn,
                     "sender_name" => $accountDb->name,
-                    "recipient_account" => $accountDb3->account,
+                    "recipient_account" => $accountDb3->number,
                     "recipient_code_filial" => $accountDb3->filial,
                     "recipient_tax" => $accountDb3->inn,
                     "recipient_name" => $accountDb3->name,
