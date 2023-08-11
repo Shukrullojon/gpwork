@@ -50,7 +50,7 @@ class CommissionCommand extends Command
                 'balance' => $account->balance - $transfer->commission_amount
             ]);
             $transfer->update([
-                'status' => 1,
+                'is_commission' => 1,
             ]);
         }
         return 0;
