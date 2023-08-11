@@ -25,6 +25,7 @@ class CreateTransfersTable extends Migration
             $table->bigInteger('credit_amount')->nullable();
             $table->bigInteger('debit_amount')->nullable();
             $table->bigInteger('commission_amount')->nullable();
+            $table->tinyInteger('is_commission')->default(0);
             $table->string('currency',3)->nullable();
             $table->string('document_id')->nullable();
             $table->string('document_ext_id')->nullable();
