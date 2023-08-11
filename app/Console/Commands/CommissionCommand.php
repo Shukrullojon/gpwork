@@ -10,7 +10,7 @@ use App\Services\AbsService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 
-class HoldCommand extends Command
+class CommissionCommand extends Command
 {
     /**
      * The name and signature of the console command.
