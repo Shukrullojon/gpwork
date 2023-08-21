@@ -26,7 +26,20 @@
                                 <div class="col-md-3">
                                     <div class="small-box bg-info ">
                                         <div class="inner">
-                                            <h3 class="text-center">ACCOUNT </h3>
+                                            <h3 class="text-center">Credit</h3>
+                                            <p>{{ number_format($credit/100) }} UZS</p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-stats-bars"></i>
+                                        </div>
+                                        <p href="#" class="small-box-footer " style="text-align: right"></p>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="small-box bg-info ">
+                                        <div class="inner">
+                                            <h3 class="text-center">ACCOUNT</h3>
                                             <p>{{ number_format($account->balance/100) }} UZS</p>
                                         </div>
                                         <div class="icon">
@@ -39,8 +52,8 @@
                                 <div class="col-md-3">
                                     <div class="small-box bg-success">
                                         <div class="inner">
-                                            <h3 class="text-center">Account To Card </h3>
-                                            <p>{{ number_format($toCardAmount/100) }} UZS</p>
+                                            <h3 class="text-center">UCOIN</h3>
+                                            <p>{{ number_format($cards/100) }} UZS</p>
                                         </div>
                                         <div class="icon">
                                             <i class="ion ion-stats-bars"></i>
@@ -54,6 +67,19 @@
                                         <div class="inner">
                                             <h3 class="text-center">Debit</h3>
                                             <p>{{ number_format($transferAmount/100) }} UZS</p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-stats-bars"></i>
+                                        </div>
+                                        <p href="#" class="small-box-footer " style="text-align: right"></p>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="small-box bg-gradient-indigo">
+                                        <div class="inner">
+                                            <h3 class="text-center">Commission</h3>
+                                            <p>{{ number_format($transferAmountCommsiion/100) }} UZS</p>
                                         </div>
                                         <div class="icon">
                                             <i class="ion ion-stats-bars"></i>

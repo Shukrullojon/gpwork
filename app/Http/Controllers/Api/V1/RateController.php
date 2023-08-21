@@ -17,9 +17,16 @@ class RateController extends Controller
         $r = [];
         foreach ($rate['data']['responseBody']['response'] as $response){
             if($response['currencyCode'] == 643){
-                $r = $response;
+                if (!empty($r)){
+                    if ($r['id'] < $response['id']){
+                        $r = $response;
+                    }
+                }else{
+                    $r = $response;
+                }
             }
         }
+
         return (!empty($r)) ? [
             'id' => $r['id'],
             'currencyCode' => $r['currencyCode'],
