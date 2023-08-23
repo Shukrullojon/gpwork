@@ -41,6 +41,7 @@ class TransferController extends Controller
             'amount' => $params['params']['amount'],
             'currency' => $params['params']['currency'],
             'status' => 0,
+            'purpose' => $params['params']['purpose'],
         ]);
 
         $request = TransferService::create([
@@ -59,6 +60,7 @@ class TransferController extends Controller
                 'document_id' => $request['result']['document_id'],
                 'document_ext_id' => $request['result']['document_ext_id'],
                 'rate' => $request['result']['rate'],
+
             ]);
             if ($card->balance < $transfer->debit_amount) {
                 return [
@@ -145,6 +147,29 @@ class TransferController extends Controller
                     'status' => 3,
                 ]);
                 // money to hold
+                $data1 = [
+                    "type" => "101",
+                    "sender_account" => $accountDb->number,
+                    "sender_code_filial" => $accountDb->filial,
+                    "sender_tax" => $accountDb->inn,
+                    "sender_name" => $accountDb->name,
+                    "recipient_account" => $accountDb3->number,
+                    "recipient_code_filial" => $accountDb3->filial,
+                    "recipient_tax" => $accountDb3->inn,
+                    "recipient_name" => $accountDb3->name,
+                    "purpose" => [
+                        "code" => "00668",
+                        "name" => "Перевод GPWORK - ".date("Y-m-d H:i:s"). " Пополнение на сумму ".number_format($transfer->debit_amount/100)." ПК ".$transfer->receiver." Трансфер ИД: ".$transfer->id." ".$transfer->purpose
+                    ],
+                    "amount" => $transfer->debit_amount,
+                ];
+                Hold::create([
+                    'model' => Transfer::class,
+                    'model_id' => $transfer->id,
+                    'data' => json_encode($data1, JSON_UNESCAPED_UNICODE),
+                    'amount' => $transfer->debit_amount,
+                    'state' => 0,
+                ]);
                 $data = [
                     "type" => "101",
                     "sender_account" => $accountDb->number,
@@ -157,21 +182,22 @@ class TransferController extends Controller
                     "recipient_name" => $accountDb3->name,
                     "purpose" => [
                         "code" => "00668",
-                        "name" => "перевод (дата: " . date("Y-m-d H:i:s") . ") sender:" . $transfer->sender . " receiver:" . $transfer->receiver . " transfer_id: " . $transfer->id
+                        "name" => "Комиссион ".$transfer->purpose
                     ],
-                    "amount" => $transfer->debit_amount + $transfer->commission_amount,
+                    "amount" => $transfer->commission_amount,
                 ];
                 Hold::create([
                     'model' => Transfer::class,
                     'model_id' => $transfer->id,
                     'data' => json_encode($data, JSON_UNESCAPED_UNICODE),
-                    'amount' => $transfer->debit_amount + $transfer->commission_amount,
+                    'amount' => $transfer->commission_amount,
                     'state' => 0,
                 ]);
                 $request = TransferService::confirm([
                     'ext_id' => $transfer->ext_id,
                 ]);
                 if (isset($request['status']) and $request['status']) {
+                    // debit commission
                     $transfer->update([
                         'status' => 4,
                     ]);

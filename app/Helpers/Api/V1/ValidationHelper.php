@@ -33,6 +33,7 @@ class ValidationHelper
                 "params.receiver" => "required|numeric",
                 "params.amount" => "required|integer|min:100|max:10000000",
                 "params.currency" => "required|integer|in:643",
+                "params.purpose" => "required",
             ];
         }else if($params['method'] == "transfer.confirm"){
             return [

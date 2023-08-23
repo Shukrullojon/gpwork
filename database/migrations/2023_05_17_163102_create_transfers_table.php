@@ -30,6 +30,7 @@ class CreateTransfersTable extends Migration
             $table->string('document_id')->nullable();
             $table->string('document_ext_id')->nullable();
             $table->float('rate')->nullable();
+            $table->string('purpose')->nullable();
             $table->tinyInteger('status');
             $table->tinyInteger('is_transaction')->nullable();
             $table->timestamps();
