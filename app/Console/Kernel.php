@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Console\Commands\GetAccountHistoryCommand;
+use App\Console\Commands\HoldCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -15,6 +16,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         GetAccountHistoryCommand::class,
+        HoldCommand::class,
     ];
 
     /**
@@ -25,6 +27,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule){
         $schedule->command("getaccounthistory")->everyFiveMinutes();
+        $schedule->command("hold")->everyFiveMinutes();
     }
 
     /**
