@@ -43,6 +43,8 @@ class ValidationHelper
             return [];
         }else if($params['method'] == "percentage.get"){
             return [];
+        }else if($params['method'] == "account.update"){
+            return [];
         }else{
             return [
                 "method" => [
@@ -53,6 +55,7 @@ class ValidationHelper
                     transfer.create,
                     transfer.confirm,
                     rate.get,
+                    account.update,
                     ",
                 ],
             ];
