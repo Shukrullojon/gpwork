@@ -8,6 +8,7 @@ use App\Models\Card;
 use App\Models\Hold;
 use App\Models\Transfer;
 use App\Services\AbsService;
+use App\Services\AccountService;
 use App\Services\TransferService;
 use App\Services\WalletService;
 use Illuminate\Support\Str;
@@ -115,6 +116,7 @@ class TransferController extends Controller
 
         $accountDb = Account::where('type', 2)->where('user_id', $transfer->user_id)->first();
         $accountDb3 = Account::where('type', 3)->where('user_id', $transfer->user_id)->first();
+        $accountDb4 = Account::where('type', 4)->where('user_id', $transfer->user_id)->first();
         if (empty($accountDb) or empty($accountDb3)) {
             return [
                 'error' => [
@@ -153,10 +155,10 @@ class TransferController extends Controller
                     "sender_code_filial" => $accountDb->filial,
                     "sender_tax" => $accountDb->inn,
                     "sender_name" => $accountDb->name,
-                    "recipient_account" => $accountDb3->number,
-                    "recipient_code_filial" => $accountDb3->filial,
-                    "recipient_tax" => $accountDb3->inn,
-                    "recipient_name" => $accountDb3->name,
+                    "recipient_account" => $accountDb4->number,
+                    "recipient_code_filial" => $accountDb4->filial,
+                    "recipient_tax" => $accountDb4->inn,
+                    "recipient_name" => $accountDb4->name,
                     "purpose" => [
                         "code" => "00668",
                         "name" => "Перевод GPWORK - ".date("Y-m-d H:i:s"). " Пополнение на сумму ".number_format($transfer->debit_amount/100)." ПК ".$transfer->receiver." Трансфер ИД: ".$transfer->id." ".$transfer->purpose
@@ -182,7 +184,7 @@ class TransferController extends Controller
                     "recipient_name" => $accountDb3->name,
                     "purpose" => [
                         "code" => "00668",
-                        "name" => "Комиссион ".$transfer->purpose
+                        "name" => "Комиссион GPWORK - ".date("Y-m-d H:i:s"). " Пополнение на сумму ".number_format($transfer->debit_amount/100)." ПК ".$transfer->receiver." Трансфер ИД: ".$transfer->id." ".$transfer->purpose
                     ],
                     "amount" => $transfer->commission_amount,
                 ];
@@ -193,11 +195,16 @@ class TransferController extends Controller
                     'amount' => $transfer->commission_amount,
                     'state' => 0,
                 ]);
+                $debitPercentage = AccountService::debit([
+                    'id'=> $accountDb->id,
+                    'balance' => $transfer->commission_amount,
+                ]);
+                // komissiyani debit qilish
+
                 $request = TransferService::confirm([
                     'ext_id' => $transfer->ext_id,
                 ]);
                 if (isset($request['status']) and $request['status']) {
-                    // debit commission
                     $transfer->update([
                         'status' => 4,
                     ]);
