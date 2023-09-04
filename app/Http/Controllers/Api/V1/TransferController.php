@@ -77,7 +77,16 @@ class TransferController extends Controller
             }
             return $this->success($transfer);
         } else {
-            return $request['error'];
+            return $request['error'] ?? [
+                'error' => [
+                    'code' => 305,
+                    'message' => [
+                        'uz' => 'Aniqlanmagan xatolik',
+                        'ru' => 'Необнаруженная ошибка',
+                        'en' => 'Undetected error',
+                    ],
+                ],
+            ];
         }
     }
 
@@ -197,7 +206,7 @@ class TransferController extends Controller
                 ]);
                 $debitPercentage = AccountService::debit([
                     'id'=> $accountDb->id,
-                    'balance' => $transfer->commission_amount,
+                    'amount' => $transfer->commission_amount,
                 ]);
                 // komissiyani debit qilish
 
