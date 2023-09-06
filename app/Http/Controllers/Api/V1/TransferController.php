@@ -193,7 +193,7 @@ class TransferController extends Controller
                     "recipient_name" => $accountDb3->name,
                     "purpose" => [
                         "code" => "00668",
-                        "name" => "Комиссион GPWORK - ".date("Y-m-d H:i:s"). " Пополнение на сумму ".number_format($transfer->debit_amount/100)." ПК ".$transfer->receiver." Трансфер ИД: ".$transfer->id." ".$transfer->purpose
+                        "name" => "Комиссион GPWORK - ".date("Y-m-d H:i:s"). " Пополнение на сумму ".number_format($transfer->commission_amount/100)." ПК ".$transfer->receiver." Трансфер ИД: ".$transfer->id." ".$transfer->purpose
                     ],
                     "amount" => $transfer->commission_amount,
                 ];
