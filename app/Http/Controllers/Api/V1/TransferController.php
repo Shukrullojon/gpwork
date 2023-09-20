@@ -56,7 +56,7 @@ class TransferController extends Controller
             $transfer->update([
                 'currency' => $request['result']['currency'],
                 'debit_amount' => $request['result']['amount'] * $request['result']['rate'],
-                'commission_amount' => ($request['result']['amount'] * $request['result']['rate'] * 0.5) / 100,
+                'commission_amount' => ($request['result']['amount'] * $request['result']['rate'] * 1) / 100,
                 'credit_amount' => $request['result']['amount'],
                 'document_id' => $request['result']['document_id'],
                 'document_ext_id' => $request['result']['document_ext_id'],
