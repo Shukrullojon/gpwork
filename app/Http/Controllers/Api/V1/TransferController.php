@@ -25,9 +25,9 @@ class TransferController extends Controller
                 'error' => [
                     'code' => 351,
                     'message' => [
-                        'uz' => "",
-                        'ru' => "",
-                        'en' => "",
+                        'uz' => "Transfer limit",
+                        'ru' => "Transfer limit",
+                        'en' => "Transfer limit",
                     ],
                 ],
             ];
